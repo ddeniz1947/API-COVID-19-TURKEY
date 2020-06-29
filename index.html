@@ -16,42 +16,53 @@
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
     />
-    <!-- <style>
-	 #myChart.backgroundColor{
-		 color:blue;
-	 }
- </style> -->
+    <style>
+      .btnWeb{
+        text-decoration: none;
+        color: black;
+        transition: 1s;
+        font-size: 20px;
+        border: 1px solid black;
+      }
+      .btnWeb:hover {
+        font-size: 22px;
+        transition: 1s;
+        box-shadow: 3px 3px 4px #000;
+        border: 1px solid black;
+      }
+    
+    </style>
   </head>
   <body>
     <center>
-      <h1
-        style="
-          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-          justify-content: center;
-        "
+      <h5
+     class="display-4"
       >
         DENİZ CAN DİNÇ - BİLGİSAYAR MÜHENDİSİ
-      </h1>
-      <a
-        target="blank"
-        class="btn btn-secondary"
-        href="https://ddeniz1947.github.io/"
-        >Kişisel Websitem İçin Tıklayın</a
-      >
+      </h5>
+
+      <a target="blank" class="btnWeb btn btn-outline-secondary" href="https://ddeniz1947.github.io/">
+        Kişisel Websitem İçin Tıklayınız
+      </a>
       <br /><br />
     </center>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+    <div class="chartWrapper">
+      <div class="chartAreaWrapper">
+        <canvas style="background-color: azure;" id="myChart">
+        asdada</canvas>
+      </div>
+    </div>
 
-    <canvas style="background-color: azure;" id="myChart"></canvas>
     <script>
       $(document).ready(function () {
         drawChart();
         ctx.fill();
         e.preventDefault();
       });
-      function drawChart(){
+      function drawChart() {
         var array = [];
         var array2 = [];
         var array3 = [];
@@ -115,7 +126,7 @@
           },
         });
         ctx.update();
-      };
+      }
     </script>
   </body>
 </html>
