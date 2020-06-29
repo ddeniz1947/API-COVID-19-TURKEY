@@ -10,55 +10,112 @@
       integrity="sha256-nZaxPHA2uAaquixjSDX19TmIlbRNCOrf5HO1oHl5p70="
       crossorigin="anonymous"
     ></script>
- <!-- <style>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <!-- <style>
 	 #myChart.backgroundColor{
 		 color:blue;
 	 }
  </style> -->
   </head>
   <body>
+    <center>
+      <h1
+        style="
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          justify-content: center;
+        "
+      >
+        DENİZ CAN DİNÇ - BİLGİSAYAR MÜHENDİSİ
+      </h1>
+      <a
+        target="blank"
+        class="btn btn-secondary"
+        href="https://ddeniz1947.github.io/"
+        >Kişisel Websitem İçin Tıklayın</a
+      >
+      <br /><br />
+    </center>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
 
-    <canvas style="background-color: azure;" id="myChart" width="400" height="400"></canvas>
+    <canvas style="background-color: azure;" id="myChart"></canvas>
     <script>
-
-
-      var array = [];
-      var array2 = [];
-      $.ajax({
-      	type: 'GET',
-      	url: `https://api.covid19api.com/total/dayone/country/turkey`,
-      	contentType: "application/json",
-      	success: function (response, status, xhr, $form) {
-
-      		for(var i =0;i<response.length;i++){
-
-      			array.push(response[i].Date.toString());
-      			array2.push(parseInt(response[i].Active));
-      		}
-
-      	}
+      $(document).ready(function () {
+        drawChart();
+        ctx.fill();
+        e.preventDefault();
       });
-      var denemeLabel = array;
-      var denemeData = array2;
-      var ctx = document.getElementById('myChart').getContext('2d');
-      var myChart = new Chart(ctx, {
-      	type: 'bar',
-      	data: {
-      		labels: denemeLabel,
-      		datasets: [{
-      			label: 'Türkiye Active COVID',
-      			data: denemeData,
-      			backgroundColor: '#006994',
-      			borderColor: [
-      			'rgba(255, 99, 132, 1)',
+      function drawChart(){
+        var array = [];
+        var array2 = [];
+        var array3 = [];
 
-      			],
-      			borderWidth: 1
-      		}]
-      	}
-      });
+        $.ajax({
+          type: "GET",
+          url: `https://api.covid19api.com/total/dayone/country/turkey`,
+          contentType: "application/json",
+          success: function (response, status, xhr, $form) {
+            for (var i = 0; i < response.length; i++) {
+              array.push(response[i].Date.toString());
+              array2.push(parseInt(response[i].Confirmed));
+              array3.push(parseInt(response[i].Recovered));
+            }
+          },
+        });
+
+        var denemeLabel = array;
+        var dataActive = array2;
+        var dataDeath = array3;
+        var ctx = document.getElementById("myChart").getContext("2d");
+        var myChart = new Chart(ctx, {
+          type: "bar",
+          responsive: true,
+          data: {
+            labels: denemeLabel,
+            datasets: [
+              {
+                label: "COVID Türkiye Aktif",
+                data: dataActive,
+                backgroundColor: "#006994",
+                borderColor: "#006994",
+                borderWidth: 1,
+              },
+              {
+                label: "COVID Türkiye İyileşen",
+                data: dataDeath,
+                backgroundColor: "#FF0000",
+                borderColor: "#FF0000",
+                borderWidth: 1,
+              },
+            ],
+          },
+          hidden: false,
+          options: {
+            scales: {
+              xAxes: [
+                {
+                  display: true,
+                },
+              ],
+              yAxes: [
+                {
+                  display: true,
+                  ticks: {
+                    beginAtZero: true,
+                  },
+                },
+              ],
+            },
+          },
+        });
+        ctx.update();
+      };
     </script>
   </body>
 </html>
