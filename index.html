@@ -1,132 +1,203 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <script
-      type="text/javascript"
-      src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"
-      integrity="sha256-nZaxPHA2uAaquixjSDX19TmIlbRNCOrf5HO1oHl5p70="
-      crossorigin="anonymous"
-    ></script>
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous"
-    />
-    <style>
-      .btnWeb{
-        text-decoration: none;
-        color: black;
-        transition: 1s;
-        font-size: 20px;
-        border: 1px solid black;
-      }
-      .btnWeb:hover {
-        font-size: 22px;
-        transition: 1s;
-        box-shadow: 3px 3px 4px #000;
-        border: 1px solid black;
-      }
-    
-    </style>
-  </head>
-  <body>
-    <center>
-      <h5
-     class="display-4"
-      >
-        DENİZ CAN DİNÇ - BİLGİSAYAR MÜHENDİSİ
-      </h5>
+<head>
+	<script
+	type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"
+	></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
+	<link
+	rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous"
+	/>
+	<style>
+		.btnWeb{
+			text-decoration: none;
+			color: black;
+			transition: 1s;
+			font-size: 20px;
+			border: 1px solid black;
+		}
+		.btnWeb:hover {
+			font-size: 22px;
+			transition: 1s;
+			box-shadow: 3px 3px 4px #000;
+			border: 1px solid black;
+		}
 
-      <a target="blank" class="btnWeb btn btn-outline-secondary" href="https://ddeniz1947.github.io/">
-        Kişisel Websitem İçin Tıklayınız
-      </a>
-      <br /><br />
-    </center>
+	</style>
+</head>
+<body>
+	
+		<div class="container">
+			<center>
+			<h5
+			class="display-4"
+			>
+			DENİZ CAN DİNÇ - BİLGİSAYAR MÜHENDİSİ
+		</h5>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
-    <div class="chartWrapper">
-      <div class="chartAreaWrapper">
-        <canvas style="background-color: azure;" id="myChart">
-        asdada</canvas>
-      </div>
-    </div>
+		<a target="blank" class="btnWeb btn btn-outline-secondary" href="https://ddeniz1947.github.io/">
+			Kişisel Websitem İçin Tıklayınız
+		</a>
+		<br /><br />
+	</center>
 
-    <script>
-      $(document).ready(function () {
-        drawChart();
-        ctx.fill();
-        e.preventDefault();
-      });
-      function drawChart() {
-        var array = [];
-        var array2 = [];
-        var array3 = [];
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
+	<h4 class="display-4">TÜRKİYE VERİLERİ</h4>
+	<div class="chartWrapper">
+		<div class="chartAreaWrapper">
+			<canvas style="background-color: azure;" id="myChart">
+			</canvas>
+		</div>
+	</div>
+	<br><br><br><br><br>
+	<h4 class="display-4"> GLOBAL VERİLER</h4>
+	<canvas style="background-color: azure;" id="myChart2">
+	</canvas>
+	<br><br><br>
+</div>
 
-        $.ajax({
-          type: "GET",
-          url: `https://api.covid19api.com/total/dayone/country/turkey`,
-          contentType: "application/json",
-          success: function (response, status, xhr, $form) {
-            for (var i = 0; i < response.length; i++) {
-              array.push(response[i].Date.toString());
-              array2.push(parseInt(response[i].Confirmed));
-              array3.push(parseInt(response[i].Recovered));
+<script>
+	$(document).ready(function (e) {
+
+		drawChart();
+		return false;
+	});
+
+	function drawChart() {
+		var array = [];
+		var array2 = [];
+		var array3 = [];
+
+		$.ajax({
+			type: "GET",
+			url: `https://api.covid19api.com/total/dayone/country/turkey`,
+			contentType: "application/json",
+			success: function (response, status, xhr, $form) {
+				for (var i = 0; i < response.length; i++) {
+					array.push(response[i].Date.toString());
+					array2.push(parseInt(response[i].Confirmed));
+					array3.push(parseInt(response[i].Recovered));
+				}
+			},
+		});
+
+		var denemeLabel = array;
+		var dataActive = array2;
+		var dataDeath = array3;
+		var ctx = document.getElementById("myChart").getContext("2d");
+		var myChart = new Chart(ctx, {
+			type: "bar",
+			responsive: true,
+			data: {
+				labels: denemeLabel,
+				datasets: [
+				{
+					label: "COVID Türkiye Aktif",
+					data: dataActive,
+					backgroundColor: "#006994",
+					borderColor: "#006994",
+					borderWidth: 1,
+				},
+				{
+					label: "COVID Türkiye İyileşen",
+					data: dataDeath,
+					backgroundColor: "#FF0000",
+					borderColor: "#FF0000",
+					borderWidth: 1,
+				},
+				],
+			},
+			hidden: false,
+			options: {
+				scales: {
+					xAxes: [
+					{
+						display: true,
+					},
+					],
+					yAxes: [
+					{
+						display: true,
+						ticks: {
+							beginAtZero: true,
+						},
+					},
+					],
+				},
+			},
+		});
+		ctx.fill();
+	}
+
+</script>
+<script>
+
+	$(window).ready(function (e) {
+
+		drawChart2();
+		return false;
+	});
+
+	function drawChart2() {
+		var respGlob = [];
+
+		$.ajax({
+			type: "GET",
+			url: `https://api.covid19api.com/world/total`,
+			contentType: "application/json",
+			success: function (response, status, xhr, $form) {
+				respGlob.push(parseInt(response.TotalConfirmed));
+				respGlob.push(parseInt(response.TotalRecovered));
+				respGlob.push(parseInt(response.TotalDeaths));
+
+
+				
+			},
+		});
+		var newArray = respGlob;
+
+		var ctx2 = document.getElementById("myChart2").getContext("2d");
+		var myChart = new Chart(ctx2, {
+			type: "pie",
+			responsive: true,
+			data: {
+				datasets: [{
+					data: newArray,
+					backgroundColor: ['rgb(0,191,255)','rgb(173,255,47)','rgb(220,20,60)'],
+					hoverBorderWidth : 5,
+					borderWidth :  1,
+					label : [
+					'Global Aktif COVID-19',
+					'Global İyileşen COVID-19',
+					'Global Ölümler COVID-19'
+					],
+					borderColor:['rgb(0,0,0)','rgb(0,0,0)','rgb(0,0,0)'],
+				}],
+				labels: [
+				'Global Aktif COVID-19',
+				'Global İyileşen COVID-19',
+				'Global Ölümler COVID-19'
+				]
+			},
+			options: {
+				legend: {
+					labels: {
+                // This more specific font property overrides the global property
+                fontSize: 20
             }
-          },
-        });
+        }
+    }
 
-        var denemeLabel = array;
-        var dataActive = array2;
-        var dataDeath = array3;
-        var ctx = document.getElementById("myChart").getContext("2d");
-        var myChart = new Chart(ctx, {
-          type: "bar",
-          responsive: true,
-          data: {
-            labels: denemeLabel,
-            datasets: [
-              {
-                label: "COVID Türkiye Aktif",
-                data: dataActive,
-                backgroundColor: "#006994",
-                borderColor: "#006994",
-                borderWidth: 1,
-              },
-              {
-                label: "COVID Türkiye İyileşen",
-                data: dataDeath,
-                backgroundColor: "#FF0000",
-                borderColor: "#FF0000",
-                borderWidth: 1,
-              },
-            ],
-          },
-          hidden: false,
-          options: {
-            scales: {
-              xAxes: [
-                {
-                  display: true,
-                },
-              ],
-              yAxes: [
-                {
-                  display: true,
-                  ticks: {
-                    beginAtZero: true,
-                  },
-                },
-              ],
-            },
-          },
-        });
-        ctx.update();
-      }
-    </script>
-  </body>
+});
+		ctx2.fill();
+	}
+
+
+</script>
+</body>
 </html>
