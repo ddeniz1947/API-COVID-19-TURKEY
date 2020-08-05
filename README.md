@@ -2,4 +2,6 @@
  API-COVID-19-TURKEY
 Gün Gün Aktif COVID-19 verilerini şema halinde gösteren web sayfası.
 Jquery ile yazılmıştır.
- https://ddeniz1947.github.io/API-COVID-19-TURKEY/
+
+
+Live Link : https://ddeniz1947.github.io/COVID-19-TURKEY-WEBSITE-JQUERY/
